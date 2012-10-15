@@ -1,1 +1,7 @@
 <h1>Home</h1>
+
+<ul>
+<% @songs.each do |song| %>
+	<li><%= song.title %> by <%= song.artist.name %></li>
+<% end %>
+</ul>
