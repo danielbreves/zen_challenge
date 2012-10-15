@@ -1,7 +1,10 @@
 <h1>Home</h1>
-
-<ul>
+<table border="1">
 <% @songs.each do |song| %>
-	<li><%= song.title %> by <%= song.artist.name %></li>
+	<tr>
+		<td><%= song.title %></td>
+		<td><%= song.artist.name %></td>
+		<td><%= song.votes %></td>
+	</tr>
 <% end %>
-</ul>
+</table>
