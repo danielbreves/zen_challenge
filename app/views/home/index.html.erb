@@ -5,6 +5,11 @@
 		<td><%= song.title %></td>
 		<td><%= song.artist.name %></td>
 		<td><%= song.votes %></td>
+		<td class="up_vote">
+			<%= link_to "Up vote",
+				  {:controller => 'songs', :action => 'up_vote', :id => song.id}
+			%>
+		</td>
 	</tr>
 <% end %>
 </table>

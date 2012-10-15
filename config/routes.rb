@@ -1,5 +1,6 @@
 ZenChallenge::Application.routes.draw do
   get "home/index"
+  match ':controller(/:action(/:id))'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
