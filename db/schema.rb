@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015050117) do
+ActiveRecord::Schema.define(:version => 20121016073851) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(:version => 20121015050117) do
     t.string   "youtube"
     t.string   "soundcloud"
     t.integer  "artist_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "votes"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "votes",      :default => 0
   end
 
   add_index "songs", ["artist_id"], :name => "index_songs_on_artist_id"
