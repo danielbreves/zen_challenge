@@ -50,4 +50,13 @@ class ArtistsController < ApplicationController
 			end
 		end
 	end
+
+	def destroy
+		@artist = Artist.find(params[:id])
+		@artist.destroy
+
+		respond_to do |format|
+			format.html { redirect_to artists_url }
+		end
+	end
 end
