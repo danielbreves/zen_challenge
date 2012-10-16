@@ -1,0 +1,11 @@
+<p>
+	<strong>Name:</strong>
+	<%= @artist.name %>
+</p>
+
+<p>
+	<strong>Songs:</strong>
+	<%= join_songs(@artist) %>
+</p>
+
+<%= link_to 'Back', artists_path %>

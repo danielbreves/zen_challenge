@@ -4,6 +4,7 @@
 <% @artists.each do |artist| %>
   <tr>
     <td><%= artist.name %></td>
+    <td><%= link_to 'Show', artist %></td>
   </tr>
 <% end %>
 </table>
