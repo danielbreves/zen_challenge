@@ -1,0 +1,13 @@
+<h1>Artists</h1>
+
+<table>
+<% @artists.each do |artist| %>
+  <tr>
+    <td><%= artist.name %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "Home", {:controller => 'home'} %>
