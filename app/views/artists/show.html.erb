@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <p>
 	<strong>Name:</strong>
 	<%= @artist.name %>
@@ -8,4 +10,5 @@
 	<%= join_songs(@artist) %>
 </p>
 
+<%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>

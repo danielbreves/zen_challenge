@@ -34,4 +34,20 @@ class ArtistsController < ApplicationController
 			end
 		end
 	end
+
+	def edit
+		@artist = Artist.find(params[:id])
+	end
+
+	def update
+		@artist = Artist.find(params[:id])
+
+		respond_to do |format|
+			if @artist.update_attributes(params[:artist])
+				format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
+			else
+				format.html { render action: "edit" }
+			end
+		end
+	end
 end
