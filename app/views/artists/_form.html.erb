@@ -17,6 +17,10 @@
     <%= artist_form.text_field :name %>
   </div>
 
+  <h2>Songs</h2>
+  <%= render :partial => 'songs/form',
+             :locals => {:form => artist_form} %>
+
   <div class="actions">
     <%= artist_form.submit %>
   </div>

@@ -1,0 +1,22 @@
+<%= form.fields_for :songs do |song_form| %>
+  <div class="field">
+    <%= song_form.label :title, 'Title:' %>
+    <%= song_form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= song_form.label :youtube, 'YouTube:' %>
+    <%= song_form.text_field :youtube %>
+  </div>
+  <div class="field">
+    <%= song_form.label :soundcloud, 'Soundcloud:' %>
+    <%= song_form.text_field :soundcloud %>
+  </div>
+  <% unless song_form.object.nil? || song_form.object.new_record? %>
+    <div class="field">
+      <%= song_form.label :_destroy, 'Remove:' %>
+      <%= song_form.check_box :_destroy %>
+    </div>
+    <br />
+  <% end %>
+<% end %>
+<br />
