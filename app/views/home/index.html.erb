@@ -2,7 +2,7 @@
 <table border="1">
 <% @songs.each do |song| %>
 	<tr>
-		<td><%= song.title %></td>
+		<td><%= link_to song.title, {:controller => 'songs',:action => 'show', :id => song.id} %></td>
 		<td><%= song.artist.name %></td>
 		<td><%= song.votes %></td>
 		<td class="up_vote">

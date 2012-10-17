@@ -1,0 +1,9 @@
+<h1><%= @song.title %></h2>
+
+<%= link_to('YouTube<br />'.html_safe, @song.youtube, :target => "_blank") unless @song.youtube.blank? %>
+
+<%= link_to('Soundcloud<br />'.html_safe, @song.soundcloud, :target => "_blank") unless @song.soundcloud.blank? %>
+
+<br/>
+
+<%= link_to "Back", {:controller => 'home'} %>

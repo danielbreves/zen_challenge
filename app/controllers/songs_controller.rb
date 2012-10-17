@@ -8,4 +8,12 @@ class SongsController < ApplicationController
 	      format.js { render json: @song }
 	    end
 	end
+
+	def show
+		@song = Song.find(params[:id])
+
+		respond_to do |format|
+		  format.html
+		end
+	end
 end
