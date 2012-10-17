@@ -1,8 +1,16 @@
 <h1><%= @song.title %></h2>
 
-<%= link_to('YouTube<br />'.html_safe, @song.youtube, :target => "_blank") unless @song.youtube.blank? %>
+<% unless @song.youtube.blank? %>
 
-<%= link_to('Soundcloud<br />'.html_safe, @song.soundcloud, :target => "_blank") unless @song.soundcloud.blank? %>
+<%= raw youtube_embed @song.youtube %><br/>
+
+<% end %>
+
+<% unless @song.soundcloud.blank? %>
+
+<%= raw soundcloud_embed @song.soundcloud %><br/>
+
+<% end %>
 
 <br/>
 
