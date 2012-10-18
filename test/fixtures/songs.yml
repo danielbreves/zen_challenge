@@ -4,10 +4,12 @@ one:
   title: MyString
   youtube: MyString
   soundcloud: MyString
-  artist: 
+  votes: 0
+  artist: one
 
 two:
   title: MyString
   youtube: MyString
   soundcloud: MyString
-  artist: 
+  votes: 0
+  artist: two
