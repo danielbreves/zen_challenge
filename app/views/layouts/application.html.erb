@@ -8,7 +8,32 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="/">ZenChallenge</a>
+			<ul class="nav">
+				<li class="<%= 'active' if params[:controller] == 'home' %>">
+					<%= link_to "Home", {:controller => 'home'} %>
+				</li>
+				<li class="<%= 'active' if params[:controller] == 'artists' %>">
+					<%= link_to "Admin", {:controller => 'artists'} %>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<%= yield %>
+		</div>
+	</div>
+	<div class="row">
+		<div id="footer" class="span12">
+			<hr />
+			<p>Developed by <a href="http://www.linkedin.com/profile/view?id=118865371" target="_blank">Daniel Breves</a></p>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
