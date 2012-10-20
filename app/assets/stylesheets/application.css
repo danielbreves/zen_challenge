@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+div#footer p {
+	text-align: center;
+	color: #999;
+}
