@@ -1,19 +1,28 @@
 <h1>Home</h1>
-<table border="1">
-<% @songs.each do |song| %>
-	<tr>
-		<td><%= link_to song.title, {:controller => 'songs',:action => 'show', :id => song.id} %></td>
-		<td><%= song.artist.name %></td>
-		<td><%= song.votes %></td>
-		<td class="up_vote">
-			<%= link_to "Up vote",
-				  {:controller => 'songs', :action => 'up_vote', :id => song.id}
-			%>
-		</td>
-	</tr>
-<% end %>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Song Title</th>
+			<th>Artist</th>
+			<th>Votes</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @songs.each do |song| %>
+			<tr class="song">
+				<td>
+					<%= link_to song.title, {:controller => 'songs',:action => 'show', :id => song.id} %>
+				</td>
+				<td><%= song.artist.name %></td>
+				<td><%= song.votes %></td>
+				<td class="up_vote">
+					<%= link_to ({:controller => 'songs', :action => 'up_vote', :id => song.id}),
+						  :class => 'btn' do %>
+					<i class="icon-heart"></i>
+					<% end %>
+				</td>
+			</tr>
+	<% end %>
+	</tbody>
 </table>
-
-<br />
-
-<%= link_to "Admin", {:controller => 'artists'} %>
