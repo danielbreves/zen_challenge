@@ -1,7 +1,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Remove?</th>
+      <th></th>
       <th>Title</th>
       <th>YouTube</th>
       <th>Soundcloud</th>
@@ -11,10 +11,7 @@
     <%= form.fields_for :songs do |song_form| %>
       <tr>
         <td>
-            <% unless song_form.object.nil? || song_form.object.new_record? %>
-                <%= song_form.label :_destroy %>
-                <%= song_form.check_box :_destroy %>
-            <% end %>
+          <%= link_to "Remove", '#', :class => 'remove_song btn btn-small btn-danger' %>
         </td>
         <td>
           <%= song_form.label :title, 'Title:' %>
