@@ -1,14 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @artist.name %></h1>
+</div>
 
-<p>
-	<strong>Name:</strong>
-	<%= @artist.name %>
-</p>
+<% if notice %>
+  <p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
 
-<p>
-	<strong>Songs:</strong>
-	<%= join_songs(@artist) %>
-</p>
+<% if @artist.songs.any? %>
+  <h2>Songs:</h2>
 
-<%= link_to 'Edit', edit_artist_path(@artist) %> |
-<%= link_to 'Back', artists_path %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>YouTube</th>
+        <th>Soundcloud</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @artist.songs.each do |song| %>
+            <tr>
+              <th><%= song.id %></th>
+              <td><%= song.title %></td>
+              <td>
+              	<%= link_to song.youtube, song.youtube, :target => '_blank' unless song.youtube.blank? %>
+              </td>
+              <td>
+              	<%= link_to song.soundcloud, song.soundcloud, :target => '_blank' unless song.soundcloud.blank? %>
+              </td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div class="form-actions">
+	<%= link_to 'Back', artists_path, :class => 'btn' %>
+	<%= link_to 'Edit', edit_artist_path(@artist), :class => 'btn' %>
+</div>
