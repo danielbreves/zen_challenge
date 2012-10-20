@@ -1,4 +1,6 @@
-<h1><%= @song.title %></h2>
+<div class="page-header">
+	<h1><%= @song.title %></h2>
+</div>	
 
 <% unless @song.youtube.blank? %>
 
@@ -14,4 +16,4 @@
 
 <br/>
 
-<%= link_to "Back", {:controller => 'home'} %>
+<%= link_to "Back", {:controller => 'home'}, :class => 'btn' %>
