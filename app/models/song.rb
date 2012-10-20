@@ -5,5 +5,5 @@ class Song < ActiveRecord::Base
 		
 	validates :artist, :presence => true
 
-	belongs_to :artist
+	belongs_to :artist, :inverse_of => :songs
 end

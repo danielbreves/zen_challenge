@@ -3,7 +3,7 @@ class Artist < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  has_many :songs, :dependent => :destroy
+  has_many :songs, :dependent => :destroy, :inverse_of => :artist
 
   accepts_nested_attributes_for :songs, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
