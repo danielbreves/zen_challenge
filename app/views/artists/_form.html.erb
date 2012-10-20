@@ -1,8 +1,8 @@
 <% @artist.songs.build %>
 <%= form_for(@artist) do |artist_form| %>
   <% if @artist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+    <div id="error_explanation" class="alert alert-error">
+      <strong><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</strong>
 
       <ul>
       <% @artist.errors.full_messages.each do |msg| %>
@@ -21,7 +21,9 @@
   <%= render :partial => 'songs/form',
              :locals => {:form => artist_form} %>
 
-  <div class="actions">
-    <%= artist_form.submit %>
+  <div class="form-actions">
+    <%= artist_form.submit 'Save Artist', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                artists_path, :class => 'btn' %>
   </div>
 <% end %>
