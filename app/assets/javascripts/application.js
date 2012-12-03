@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require handlebars
+//= require ember
+//= require app
 //= require_tree .
