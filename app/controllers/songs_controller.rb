@@ -22,7 +22,7 @@ class SongsController < ApplicationController
 
 		respond_to do |format|
 		  format.html
-		  format.json { render json: @song }
+		  format.json { render :json => @song.to_json(:include => :artist) }
 		end
 	end
 end
