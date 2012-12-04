@@ -10,7 +10,14 @@ App.Song = Em.Object.extend({
   id: null,
   title: "",
   artist: "",
-  votes: 0
+  votes: 0,
+
+  upVote: function() {
+    self = this;
+    $.post('/songs/up_vote/' + self.id, function(data) {
+      self.set('votes', data.votes);
+    });
+  }
 });
 
 App.Song.reopenClass({
@@ -77,7 +84,7 @@ App.SongController = Em.ObjectController.extend();
 /* Routes */
 
 App.Router = Em.Router.extend({
-  
+
   root: Em.Route.extend({
 
     index: Em.Route.extend({

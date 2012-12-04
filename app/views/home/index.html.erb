@@ -17,11 +17,11 @@
 
 		  {{#each song in controller}}
 					<tr class="song">
-						<td><a href="#" {{action showSong song}}>{{song.title}}</a></td>
+						<td><a href="#" {{action "showSong" song}}>{{song.title}}</a></td>
 						<td>{{song.artist}}</td>
 						<td>{{song.votes}}</td>
 						<td class="up_vote">
-							<a href="#" class="btn"><i class="icon-heart"></i></a>
+							<a href="#" class="btn" {{action "upVote" target="song"}}><i class="icon-heart"></i></a>
 						</td>
 					</tr>
 			{{/each}}
@@ -35,5 +35,5 @@
 		<h1>{{title}}</h1>
 		<h5>by <em>{{artist}}</em></h5>
 	</div>
-	<a href="#" class="btn" {{action showSongs}}>Back</a>
+	<a href="#" class="btn" {{action "showSongs"}}>Back</a>
 </script>
