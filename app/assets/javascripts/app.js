@@ -46,7 +46,6 @@ App.Song.reopenClass({
     });
 
     $.getJSON('/songs/show/' + song_id, function(data) {
-      console.log(data);
       song.setProperties({
         title: data.title,
         artist: data.artist.name,
@@ -77,7 +76,11 @@ App.SongView = Em.View.extend({
 
 App.ApplicationController = Em.Controller.extend();
 
-App.SongsController = Em.ArrayController.extend();
+App.SongsController = Em.ArrayController.extend({
+  content: [],
+  sortProperties: ['votes'],
+  sortAscending: false
+});
 
 App.SongController = Em.ObjectController.extend();
 
