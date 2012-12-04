@@ -15,11 +15,11 @@
 		</thead>
 		<tbody>
 
-		  {{#each App.songsController}}
+		  {{#each song in controller}}
 					<tr class="song">
-						<td>{{title}}</td>
-						<td>{{artist}}</td>
-						<td>{{votes}}</td>
+						<td>{{song.title}}</td>
+						<td>{{song.artist}}</td>
+						<td>{{song.votes}}</td>
 						<td class="up_vote">
 							<a href="#" class="btn"><i class="icon-heart"></i></a>
 						</td>

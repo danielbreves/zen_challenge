@@ -1,10 +1,7 @@
 /* Application */
 
 var App = Em.Application.create({
-  rootElement: '#main',
-  ready: function() {
-    App.songsController.loadSongs();
-  }
+  rootElement: '#main'
 });
 
 /* Models */
@@ -14,6 +11,29 @@ App.Song = Em.Object.extend({
   title: "",
   artist: "",
   votes: 0
+});
+
+App.Song.reopenClass({
+  songs: [],
+  find: function() {
+    self = this;
+    self.songs = [];
+
+    $.getJSON('/songs', function(data) {
+      $.each(data, function(i, val) {
+        var song = App.Song.create({
+          id: val.id,
+          title: val.title,
+          artist: val.artist.name,
+          votes: val.votes
+        });
+
+        self.songs.addObject(song);
+      });
+    });
+
+    return self.songs;
+  }
 });
 
 /* Views */
@@ -30,25 +50,7 @@ App.SongsView = Em.View.extend({
 
 App.ApplicationController = Em.Controller.extend();
 
-App.songsController = Em.ArrayController.create({
-  content: [],
-  loadSongs: function() {
-    var songs = this;
-
-    $.getJSON('/songs', function(data) {
-      $.each(data, function(i, val) {
-        var song = App.Song.create({
-          id: val.id,
-          title: val.title,
-          artist: val.artist.name,
-          votes: val.votes
-        });
-
-        songs.pushObject(song);
-      });
-    });
-  }
-});
+App.SongsController = Em.ArrayController.extend();
 
 /* Routes */
 
@@ -64,7 +66,7 @@ App.Router = Em.Router.extend({
     songs: Em.Route.extend({
       route: '/songs',
       connectOutlets: function(router) {
-        router.get('applicationController').connectOutlet('songs');
+        router.get('applicationController').connectOutlet('songs', App.Song.find());
       }
     })
 
