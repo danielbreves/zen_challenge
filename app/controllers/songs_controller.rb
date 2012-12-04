@@ -3,7 +3,7 @@ class SongsController < ApplicationController
 		@songs = Song.find :all
 
 		respond_to do |format|
-	      format.json { render json: @songs }
+	      format.json { render :json => @songs.to_json(:include => :artist) }
 	  end
 	end
 

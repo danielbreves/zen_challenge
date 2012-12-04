@@ -1,28 +1,31 @@
-<h1>Home</h1>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Song Title</th>
-			<th>Artist</th>
-			<th>Votes</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-	<% @songs.each do |song| %>
-			<tr class="song">
-				<td>
-					<%= link_to song.title, {:controller => 'songs',:action => 'show', :id => song.id} %>
-				</td>
-				<td><%= song.artist.name %></td>
-				<td><%= song.votes %></td>
-				<td class="up_vote">
-					<%= link_to ({:controller => 'songs', :action => 'up_vote', :id => song.id}),
-						  :class => 'btn' do %>
-					<i class="icon-heart"></i>
-					<% end %>
-				</td>
+<script type="text/x-handlebars" data-template-name="application">
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="songs">
+	<h1>Home</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Song Title</th>
+				<th>Artist</th>
+				<th>Votes</th>
+				<th>Actions</th>
 			</tr>
-	<% end %>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+
+		  {{#each App.songsController}}
+					<tr class="song">
+						<td>{{title}}</td>
+						<td>{{artist}}</td>
+						<td>{{votes}}</td>
+						<td class="up_vote">
+							<a href="#" class="btn"><i class="icon-heart"></i></a>
+						</td>
+					</tr>
+			{{/each}}
+
+		</tbody>
+	</table>
+</script>
