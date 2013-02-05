@@ -15,5 +15,6 @@
 //= require twitter/bootstrap
 //= require handlebars
 //= require ember
+//= require ember-data
 //= require app
 //= require_tree .

@@ -1,8 +1,6 @@
 /* Application */
 
-var App = Em.Application.create({
-  rootElement: '#main'
-});
+var App = Em.Application.create();
 
 /* Models */
 
@@ -21,7 +19,28 @@ App.Song = Em.Object.extend({
 });
 
 App.Song.reopenClass({
-  findAll: function() {
+
+  find: function(song_id) {
+    if (!song_id) {
+      return this.all();
+    }
+
+    var song = App.Song.create({
+      id: song_id
+    });
+
+    $.getJSON('/songs/show/' + song_id, function(data) {
+      song.setProperties({
+        title: data.title,
+        artist: data.artist.name,
+        votes: data.votes
+      });
+    });
+
+    return song;
+  },
+
+  all: function() {
     var songs = [];
 
     $.getJSON('/songs', function(data) {
@@ -38,85 +57,47 @@ App.Song.reopenClass({
     });
 
     return songs;
-  },
-
-  find: function(song_id) {
-    var song = App.Song.create({
-      id: song_id
-    });
-
-    $.getJSON('/songs/show/' + song_id, function(data) {
-      song.setProperties({
-        title: data.title,
-        artist: data.artist.name,
-        votes: data.votes
-      });
-    });
-
-    return song;
   }
 
-});
-
-/* Views */
-
-App.ApplicationView = Em.View.extend({
-  templateName: 'application'
-});
-
-App.SongsView = Em.View.extend({
-  templateName: 'songs'
-});
-
-App.SongView = Em.View.extend({
-  templateName: 'song'
 });
 
 /* Controllers */
 
 App.ApplicationController = Em.Controller.extend();
 
-App.SongsController = Em.ArrayController.extend({
-  content: [],
+App.SongsIndexController = Em.ArrayController.extend({
   sortProperties: ['votes'],
-  sortAscending: false
+  sortAscending: false,
+
+  upVote: function(song) {
+    song.upVote();
+  }
 });
 
-App.SongController = Em.ObjectController.extend();
+App.SongsSongController = Em.ObjectController.extend({
+  back: function() {
+    this.transitionTo('songs');
+  }
+});
 
 /* Routes */
 
-App.Router = Em.Router.extend({
-
-  root: Em.Route.extend({
-
-    index: Em.Route.extend({
-      route: '/',
-      redirectsTo: 'songs'
-    }),
-
-    songs: Em.Route.extend({
-      route: '/songs',
-
-      showSong: Ember.Route.transitionTo('song'),
-
-      connectOutlets: function(router) {
-        router.get('applicationController').connectOutlet('songs', App.Song.findAll());
-      }
-    }),
-
-    song: Em.Route.extend({
-      route: '/song/:song_id',
-
-      showSongs: Ember.Route.transitionTo('songs'),
-
-      connectOutlets: function(router, song) {
-        router.get('applicationController').connectOutlet('song', song);
-      }
-    })
-
-  })
+App.Router.map(function() {
+  this.route('index');
   
+  this.resource('songs', function() {
+    this.route('song', { path: '/:song_id' });
+  });
 });
 
-App.initialize();
+App.IndexRoute = Em.Route.extend({
+  redirect: function() {
+    this.transitionTo('songs');
+  }
+});
+
+App.SongsIndexRoute = Em.Route.extend({
+  model: function() {
+    return App.Song.find();
+  }
+});

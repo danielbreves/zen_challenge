@@ -1,5 +1,6 @@
 // Javascript document
 
+/*
 $(document).ready(function() {
 
 	$("tr td.up_vote a").on("click", function(e) {
@@ -23,3 +24,4 @@ function updateVotes(song) {
         }
     });
 }
+*/

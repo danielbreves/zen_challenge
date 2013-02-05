@@ -1,39 +1,70 @@
-<script type="text/x-handlebars" data-template-name="application">
-  {{outlet}}
+<script type="text/x-handlebars">
+  <div class="container">
+    {{template "header"}}
+    <div class="row">
+      <div id="main" class="span12">
+        {{outlet}}
+      </div>
+    </div>
+    {{template "footer"}}
+  </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="songs">
-	<h1>Home</h1>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Song Title</th>
-				<th>Artist</th>
-				<th>Votes</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		  {{#each song in controller}}
-					<tr class="song">
-						<td><a href="#" {{action "showSong" song}}>{{song.title}}</a></td>
-						<td>{{song.artist}}</td>
-						<td>{{song.votes}}</td>
-						<td class="up_vote">
-							<a href="#" class="btn" {{action "upVote" target="song"}}><i class="icon-heart"></i></a>
-						</td>
-					</tr>
-			{{/each}}
-
-		</tbody>
-	</table>
+<script type="text/x-handlebars" data-template-name="header">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="/">ZenChallenge</a>
+      <ul class="nav">
+        <li class="<%= 'active' if params[:controller] == 'home' %>">
+          {{#linkTo "index"}}Home{{/linkTo}}
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'artists' %>">
+          <%= link_to "Admin", {:controller => 'artists'} %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="song">
-	<div class="page-header">
-		<h1>{{title}}</h1>
-		<h5>by <em>{{artist}}</em></h5>
-	</div>
-	<a href="#" class="btn" {{action "showSongs"}}>Back</a>
+<script type="text/x-handlebars" data-template-name="footer">
+  <div class="row">
+    <div id="footer" class="span12">
+      <hr />
+      <p>Developed by <a href="http://www.linkedin.com/profile/view?id=118865371" target="_blank">Daniel Breves</a></p>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="songs/index">
+  <h1>Home</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Song Title</th>
+        <th>Artist</th>
+        <th>Votes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each song in controller}}
+          <tr class="song">
+            <td>{{#linkTo songs.song song}}{{song.title}}{{/linkTo}}</td>
+            <td>{{song.artist}}</td>
+            <td>{{song.votes}}</td>
+            <td class="up_vote">
+              <a href="#" class="btn" {{action "upVote" song}}><i class="icon-heart"></i></a>
+            </td>
+          </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script type="text/x-handlebars" data-template-name="songs/song">
+  <div class="page-header">
+    <h1>{{title}}</h1>
+    <h5>by <em>{{artist}}</em></h5>
+  </div>
+  <a href="#" class="btn" {{action "back"}}>Back</a>
 </script>
