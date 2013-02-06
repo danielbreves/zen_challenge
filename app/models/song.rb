@@ -1,5 +1,5 @@
 class Song < ActiveRecord::Base
-	attr_accessible :soundcloud, :title, :youtube, :artist
+	attr_accessible :soundcloud, :title, :youtube, :votes, :artist_id
 
 	validates :title, :presence => true
 		

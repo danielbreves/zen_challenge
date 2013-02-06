@@ -7,6 +7,7 @@ class ArtistsController < ApplicationController
 
 		respond_to do |format|
 			format.html
+			format.json { render :json => @artists }
 		end
 	end
 
@@ -15,6 +16,7 @@ class ArtistsController < ApplicationController
 
 		respond_to do |format|
 		  format.html
+		  format.json { render :json => @artist }
 		end
 	end
 

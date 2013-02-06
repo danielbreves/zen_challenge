@@ -2,63 +2,22 @@
 
 var App = Em.Application.create();
 
-/* Models */
-
-App.Song = Em.Object.extend({
-  id: null,
-  title: "",
-  artist: "",
-  votes: 0,
-
-  upVote: function() {
-    self = this;
-    $.post('/songs/up_vote/' + self.id, function(data) {
-      self.set('votes', data.votes);
-    });
-  }
+App.Store = DS.Store.extend({
+  revision: 11,
+  adapter: 'DS.RESTAdapter'
 });
 
-App.Song.reopenClass({
+/* Models */
 
-  find: function(song_id) {
-    if (!song_id) {
-      return this.all();
-    }
+App.Artist = DS.Model.extend({
+  name: DS.attr('string'),
+  songs: DS.hasMany('App.Song')
+});
 
-    var song = App.Song.create({
-      id: song_id
-    });
-
-    $.getJSON('/songs/show/' + song_id, function(data) {
-      song.setProperties({
-        title: data.title,
-        artist: data.artist.name,
-        votes: data.votes
-      });
-    });
-
-    return song;
-  },
-
-  all: function() {
-    var songs = [];
-
-    $.getJSON('/songs', function(data) {
-      $.each(data, function(i, val) {
-        var song = App.Song.create({
-          id: val.id,
-          title: val.title,
-          artist: val.artist.name,
-          votes: val.votes
-        });
-
-        songs.addObject(song);
-      });
-    });
-
-    return songs;
-  }
-
+App.Song = DS.Model.extend({
+  title: DS.attr('string'),
+  votes: DS.attr('number'),
+  artist: DS.belongsTo('App.Artist')
 });
 
 /* Controllers */
@@ -70,7 +29,8 @@ App.SongsIndexController = Em.ArrayController.extend({
   sortAscending: false,
 
   upVote: function(song) {
-    song.upVote();
+    song.incrementProperty('votes');
+    song.get('transaction').commit();
   }
 });
 
@@ -84,7 +44,7 @@ App.SongsSongController = Em.ObjectController.extend({
 
 App.Router.map(function() {
   this.route('index');
-  
+
   this.resource('songs', function() {
     this.route('song', { path: '/:song_id' });
   });

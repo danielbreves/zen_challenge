@@ -50,7 +50,7 @@
       {{#each song in controller}}
           <tr class="song">
             <td>{{#linkTo songs.song song}}{{song.title}}{{/linkTo}}</td>
-            <td>{{song.artist}}</td>
+            <td>{{song.artist.name}}</td>
             <td>{{song.votes}}</td>
             <td class="up_vote">
               <a href="#" class="btn" {{action "upVote" song}}><i class="icon-heart"></i></a>
@@ -64,7 +64,7 @@
 <script type="text/x-handlebars" data-template-name="songs/song">
   <div class="page-header">
     <h1>{{title}}</h1>
-    <h5>by <em>{{artist}}</em></h5>
+    <h5>by <em>{{artist.name}}</em></h5>
   </div>
   <a href="#" class="btn" {{action "back"}}>Back</a>
 </script>
