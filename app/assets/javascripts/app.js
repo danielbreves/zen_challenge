@@ -19,17 +19,26 @@ App.Song = Backbone.Model.extend({
 
 App.Songs = Backbone.Collection.extend({
   url: "/songs",
-  model: App.Song
+  model: App.Song,
+  comparator: function(song) {
+    return -song.get('votes');
+  }
 });
 
 App.SongsTableView = Backbone.View.extend({
   initialize: function() {
-    this.collection.on('add', this.addRow, this);
+    this.collection.on('change:votes', this.collection.sort, this.colletion);
+    this.collection.on('sort', this.addAll, this);
   },
 
   addRow: function(song) {
     var songView = new App.SongRowView({model: song});
     this.$('tbody').append(songView.render().el);
+  },
+
+  addAll: function() {
+    this.render();
+    this.collection.forEach(this.addRow, this);
   },
 
   render: function() {
