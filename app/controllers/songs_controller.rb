@@ -1,29 +1,19 @@
 class SongsController < ApplicationController
+	respond_to :json
+
 	def index
 		@songs = Song.all
-
-		respond_to do |format|
-			format.html # index.html.erb
-			format.json { render json: @songs }
-		end
+		respond_with(@songs)
 	end
 
-	def up_vote
-		@song = Song.find(params[:id])
-		@song.votes += 1
-		@song.save
-
-		respond_to do |format|
-	    	format.json { render json: @song }
-	    end
+	def update
+	  @song = Song.find(params[:id])
+	  @song.update_attributes(params[:song])
+	  respond_with(@song)
 	end
 
 	def show
 		@song = Song.find(params[:id])
-
-		respond_to do |format|
-			format.html
-			format.json { render json: @song }
-		end
+		respond_with(@song)
 	end
 end

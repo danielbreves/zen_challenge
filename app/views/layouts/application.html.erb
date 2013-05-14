@@ -3,7 +3,6 @@
 <head>
   <title>ZenChallenge</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -23,7 +22,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div id="app" class="span12">
 			<%= yield %>
 		</div>
 	</div>
@@ -34,6 +33,6 @@
 		</div>
 	</div>
 </div>
-
+<%= javascript_include_tag "application" %>
 </body>
 </html>
