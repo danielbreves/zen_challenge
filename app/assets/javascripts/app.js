@@ -72,22 +72,57 @@ App.SongRowView = Backbone.View.extend({
   }
 });
 
-App.Router = Backbone.Router.extend({
-
-  routes: {"": "index"},
+App.SongView = Backbone.View.extend({
+  template: _.template( $("#songViewTemplate").html() ),
 
   initialize: function() {
-    this.songs = new App.Songs(),
-    this.songsView = new App.SongsTableView({collection: this.songs});
-    $('#app').append(this.songsView.render().el);
+    this.model.on('sync', this.render, this);
+  },
+
+  render: function() {
+    this.$el.html( this.template({song: this.model.toJSON()}) );
+    return this;
+  }
+});
+
+App.Router = Backbone.Router.extend({
+  rootElement: $('#app'),
+
+  routes: {
+    "": "index",
+    "song/:id": "song"
   },
 
   index: function() {
+    if (!this.songsView) {
+      this.songs = new App.Songs(),
+      this.songsView = new App.SongsTableView({collection: this.songs});
+    }
+    
+    this.rootElement.append(this.songsView.el);
     this.songs.fetch();
   },
 
+  song: function(id) {
+    var self = this,
+        song, songView;
+
+    if (this.songs) {
+      song = this.songs.get(id);
+    } else {
+      song = new App.Song({id: id});
+    }
+
+    song.fetch({
+      success: function() {
+        songView = new App.SongView({model: song});
+        self.rootElement.html(songView.render().el);
+      }
+    });
+  },
+
   start: function() {
-    Backbone.history.start({pushState: true});
+    Backbone.history.start();
   }
 
 });

@@ -15,11 +15,19 @@
 
 <script id="songRowTemplate" type="text/html">
 	<td><@= song.id @></td>
-	<td><@= song.title @></td>
+	<td><a href="#song/<@= song.id @>"><@= song.title @></a></td>
 	<td><@= song.votes @></td>
 	<td class="up_vote">
 		<button class="btn vote">
 			<i class="icon-heart"></i>
 		</button>
 	</td>
+</script>
+
+<script id="songViewTemplate" type="text/html">
+	<div class="page-header">
+		<h1><@= song.title @></h2>
+	</div>	
+
+	<a href="" class="btn">Back</a>
 </script>
