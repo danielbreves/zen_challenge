@@ -1,4 +1,11 @@
-var App = {};
+var App = new (Backbone.View.extend({
+  events: {
+    'click a': function(e) {
+      e.preventDefault();
+      Backbone.history.navigate(e.target.pathname, { trigger: true });
+    }
+  }
+}))({el: document.body});
 
 // avoid conflict with rails
 _.templateSettings = {
@@ -26,13 +33,19 @@ App.Songs = Backbone.Collection.extend({
 });
 
 App.SongsTableView = Backbone.View.extend({
+  childViews: [],
+
+  template: $("#songsTableTemplate").html(),
+
   initialize: function() {
     this.collection.on('change:votes', this.collection.sort, this.colletion);
     this.collection.on('sort', this.addAll, this);
+    this.collection.on('reset', this.addAll, this);
   },
 
   addRow: function(song) {
     var songView = new App.SongRowView({model: song});
+    this.childViews.push(songView);
     this.$('tbody').append(songView.render().el);
   },
 
@@ -41,8 +54,14 @@ App.SongsTableView = Backbone.View.extend({
     this.collection.forEach(this.addRow, this);
   },
 
+  delegateEvents: function() {
+    this.childViews.forEach(function(childView) {
+      childView.delegateEvents();
+    });
+  },
+
   render: function() {
-    this.$el.html( $("#songsTableTemplate").html() );
+    this.$el.html( this.template );
     return this;
   }
 });
@@ -94,13 +113,20 @@ App.Router = Backbone.Router.extend({
   },
 
   index: function() {
-    if (!this.songsView) {
-      this.songs = new App.Songs(),
+    var self = this;
+
+    if (!this.songs) {
+      this.songs = new App.Songs();
       this.songsView = new App.SongsTableView({collection: this.songs});
+    } else {
+      this.songsView.delegateEvents();
     }
     
-    this.rootElement.append(this.songsView.el);
-    this.songs.fetch();
+    this.songs.fetch({
+      success: function() {
+        self.rootElement.html(self.songsView.el);
+      }
+    });
   },
 
   song: function(id) {
@@ -122,7 +148,7 @@ App.Router = Backbone.Router.extend({
   },
 
   start: function() {
-    Backbone.history.start();
+    Backbone.history.start({pushState: true});
   }
 
 });
