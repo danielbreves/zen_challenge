@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
 
-	http_basic_authenticate_with :name => "zen", :password => "12345"
+	http_basic_authenticate_with :name => "zen", :password => "12345", :except => [:index, :show]
 
 	def index
 		@artists = Artist.all
