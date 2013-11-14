@@ -12,37 +12,37 @@ artists = Artist.create([{name: 'The Chemical Brothers'},
 						 {name: 'The Beatles'}])
 
 Song.create(title: 'Star Guitar',
-		   artist: artists[0])
+		   			artist: artists[0])
 
 Song.create(title: 'My Elastic Eye',
-		   artist: artists[0])
+		   			artist: artists[0])
 
-Song.create(title: 'Hoops', 
-		   artist: artists[0])
+Song.create(title: 'Hoops',
+		   			artist: artists[0])
 
 Song.create(title: 'Come With Us',
-	   soundcloud: 'http://soundcloud.com/silverlightwo/the-chemical-brothers-come',
-		   artist: artists[0])
+	   				soundcloud: 'http://soundcloud.com/silverlightwo/the-chemical-brothers-come',
+		   			artist: artists[0])
 
-Song.create(title: 'Californication', 
-		  youtube: 'http://www.youtube.com/watch?v=YlUKcNNmywk',
-	   soundcloud: 'http://soundcloud.com/tomosblack/red-hot-chili-peppers-californication',
-		   artist: artists[1])
+Song.create(title: 'Californication',
+		  			youtube: 'http://www.youtube.com/watch?v=YlUKcNNmywk',
+	   				soundcloud: 'http://soundcloud.com/tomosblack/red-hot-chili-peppers-californication',
+		   			artist: artists[1])
 
 Song.create(title: 'Losing My Religion',
-		  youtube: 'http://www.youtube.com/watch?v=if-UzXIQ5vw',
-	       artist: artists[2])
+		  			youtube: 'http://www.youtube.com/watch?v=if-UzXIQ5vw',
+	       		artist: artists[2])
 
-Song.create(title: 'Imitation of Life',	
-	       artist: artists[2])
+Song.create(title: 'Imitation of Life',
+	      		artist: artists[2])
 
-Song.create(title: 'Yellow Submarine', 
-		   artist: artists[3])
+Song.create(title: 'Yellow Submarine',
+		   			artist: artists[3])
 
 Song.create(title: 'Yesterday',
-		  youtube: 'http://www.youtube.com/watch?v=5oXPgZjm6Uk',
-		   artist: artists[3])
+		  			youtube: 'http://www.youtube.com/watch?v=5oXPgZjm6Uk',
+		   			artist: artists[3])
 
 Song.create(title: 'Help!',
-		   artist: artists[3])
+		   			artist: artists[3])
 

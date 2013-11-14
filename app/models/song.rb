@@ -1,11 +1,11 @@
 class Song < ActiveRecord::Base
-	default_scope :order => 'votes DESC'
+  default_scope :order => 'votes DESC'
 
-	attr_accessible :soundcloud, :title, :youtube, :votes, :artist, :artist_id
+  attr_accessible :soundcloud, :title, :youtube, :votes, :artist, :artist_id
 
-	validates :title, :presence => true
+  validates :title, :presence => true
 
-	validates :artist, :presence => true
+  validates :artist, :presence => true
 
-	belongs_to :artist, :inverse_of => :songs
+  belongs_to :artist, :inverse_of => :songs
 end

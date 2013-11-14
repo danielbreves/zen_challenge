@@ -6,3 +6,8 @@ A website created with the purpose of learning Ruby On Rails. It lists new music
 
 Username: zen  
 Password: 12345
+
+## Branches
+
+- [Backbone.js](https://github.com/danielbreves/zen_challenge/tree/backbonejs)
+- [Ember.js](https://github.com/danielbreves/zen_challenge/tree/ember_conversion)
