@@ -1,6 +1,8 @@
 /* Application */
 
-var App = Em.Application.create();
+var App = Em.Application.create({
+  rootElement: '#application'
+});
 
 App.Store = DS.Store.extend({
   revision: 11,
@@ -43,8 +45,6 @@ App.SongsSongController = Em.ObjectController.extend({
 /* Routes */
 
 App.Router.map(function() {
-  this.route('index');
-
   this.resource('songs', function() {
     this.route('song', { path: '/:song_id' });
   });
@@ -52,7 +52,9 @@ App.Router.map(function() {
 
 App.IndexRoute = Em.Route.extend({
   redirect: function() {
-    this.transitionTo('songs');
+    if (window.location.pathname === "/") {
+      this.transitionTo('songs');
+    }
   }
 });
 
