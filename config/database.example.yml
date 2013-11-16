@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: zen_challenge_development
   pool: 5
-  username: danielbreves
+  username:
   password:
 
 test:
@@ -11,7 +11,7 @@ test:
   encoding: unicode
   database: zen_challenge_test
   pool: 5
-  username: danielbreves
+  username:
   password:
 
 production:
@@ -19,5 +19,5 @@ production:
   encoding: unicode
   database: zen_challenge_production
   pool: 5
-  username: danielbreves
-  password: Z3nChall3ng3
+  username:
+  password:
