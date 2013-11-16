@@ -1,7 +1,10 @@
 ZenChallenge::Application.routes.draw do
-  get "home/index"
   resources :artists
-  match ':controller(/:action(/:id))'
+  resources :songs, :only => [:index, :show] do
+    member do
+      post 'up_vote'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
