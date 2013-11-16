@@ -1,7 +1,6 @@
 ZenChallenge::Application.routes.draw do
-  get "home/index"
   resources :artists
-  resources :songs
+  resources :songs, :only => [:index, :update, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
