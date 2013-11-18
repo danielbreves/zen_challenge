@@ -120,7 +120,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
+  active_model_serializers (= 0.8.1)
   bootstrap-sass (~> 2.3.2)
   capistrano (~> 2.15.5)
   jquery-rails (= 2.1.3)
