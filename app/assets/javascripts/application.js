@@ -16,5 +16,6 @@
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require lodash
 //= require app
 //= require_tree .

@@ -14,6 +14,7 @@ group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.2'
+  gem 'lodash-rails'
 end
 
 gem 'jquery-rails', '2.1.3'
