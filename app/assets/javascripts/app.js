@@ -32,8 +32,12 @@ App.SongsIndexController = Em.ArrayController.extend({
 
   upVote: function(song) {
     song.incrementProperty('votes');
+    this.saveVotesFor(song);
+  },
+
+  saveVotesFor: _.debounce(function(song) {
     song.get('transaction').commit();
-  }
+  }, 250)
 });
 
 App.SongsSongController = Em.ObjectController.extend({
