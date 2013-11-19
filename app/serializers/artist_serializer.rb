@@ -1,6 +1,3 @@
-class ::ArtistSerializer < ActiveModel::Serializer
-  embed :ids, :include => true
-
+class ArtistSerializer < ActiveModel::Serializer
   attributes :id, :name
-  has_many :songs
 end

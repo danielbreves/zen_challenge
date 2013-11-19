@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   respond_to :json
 
   def index
-    @songs = Song.all
+    @songs = Song.find(:all, :include => :artist)
     respond_with(@songs)
   end
 

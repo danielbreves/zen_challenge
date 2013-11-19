@@ -4,9 +4,15 @@ var App = Em.Application.create({
   rootElement: '#application'
 });
 
+App.Adapter = DS.RESTAdapter.extend();
+
+App.Adapter.configure("App.Artist", {
+  sideloadAs: 'artists'
+});
+
 App.Store = DS.Store.extend({
   revision: 11,
-  adapter: 'DS.RESTAdapter'
+  adapter: App.Adapter.create()
 });
 
 /* Models */
@@ -37,7 +43,7 @@ App.SongsIndexController = Em.ArrayController.extend({
 
   saveVotesFor: _.debounce(function(song) {
     song.get('transaction').commit();
-  }, 250)
+  }, 500)
 });
 
 App.SongsSongController = Em.ObjectController.extend({
